@@ -39,7 +39,7 @@ public class JwtAuthService : IAuthService
         }
 
         // Validate password (plain text comparison for this demo)
-        // In production, use password hashing (bcrypt, Argon2, etc.)
+        // In production, we must use password hashing (bcrypt, Argon2, etc)
         if (user.Password != password)
         {
             return null; // Invalid password

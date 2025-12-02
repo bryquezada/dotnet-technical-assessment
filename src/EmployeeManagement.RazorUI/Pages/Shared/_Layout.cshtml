@@ -24,7 +24,11 @@
                         </li>
                     </ul>
                     <div>
-                        <a class="btn btn-light" asp-area="" asp-page="/Login" style="font-weight: 600;">Login</a>
+                        @using Microsoft.AspNetCore.Http
+                        @if (string.IsNullOrEmpty(Context.Session.GetString("JwtToken")))
+                        {
+                            <a class="btn btn-light" asp-area="" asp-page="/Login" style="font-weight: 600;">Login</a>
+                        }
                     </div>
                 </div>
             </div>
@@ -36,9 +40,9 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer text-white">
         <div class="container">
-            &copy; 2025 - Employee Management System - <a asp-area="" asp-page="/Privacy">Privacy</a>
+            &copy; 2025 - Employee Management System - <a asp-area="" asp-page="/Privacy" class="text-white">Privacy</a>
         </div>
     </footer>
 
