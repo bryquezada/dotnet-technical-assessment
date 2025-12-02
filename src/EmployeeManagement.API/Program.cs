@@ -127,7 +127,7 @@ app.UseHttpsRedirection();
 // Enable CORS
 app.UseCors("AllowAll");
 
-// Authentication & Authorization middleware (order it does matter!)
+// Authentication & Authorization middleware (order it does matter haha)
 app.UseAuthentication();
 app.UseAuthorization();
 

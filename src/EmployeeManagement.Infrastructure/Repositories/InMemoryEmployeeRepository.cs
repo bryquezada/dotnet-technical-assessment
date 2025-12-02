@@ -29,21 +29,21 @@ public class InMemoryEmployeeRepository : IEmployeeRepository
                 Id = 1,
                 Name = "John Doe",
                 Birthdate = new DateTime(1990, 5, 15),
-                IdentityNumber = "001-150590-1001A"
+                IdentityNumber = "04692238-1"
             },
             new Employee
             {
                 Id = 2,
                 Name = "Jane Smith",
                 Birthdate = new DateTime(1985, 8, 22),
-                IdentityNumber = "001-220885-2002B"
+                IdentityNumber = "04692238-2"
             },
             new Employee
             {
                 Id = 3,
                 Name = "Bob Johnson",
                 Birthdate = new DateTime(1992, 12, 10),
-                IdentityNumber = "001-101292-3003C"
+                IdentityNumber = "04692238-3"
             }
         };
 

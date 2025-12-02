@@ -2,6 +2,7 @@
 @model EmployeeManagement.RazorUI.Pages.LoginModel
 @{
     ViewData["Title"] = "Login";
+    Layout = null;
 }
 
 <!DOCTYPE html>
@@ -160,9 +161,46 @@
             font-size: 12px;
             margin-top: 5px;
         }
+        .navbar-transparent {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .navbar-brand {
+            color: white;
+            font-size: 20px;
+            font-weight: 700;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: white;
+        }
     </style>
 </head>
 <body>
+    <nav class="navbar-transparent">
+        <a href="/" class="navbar-brand">🏢 Employee Management</a>
+        <a href="/" class="nav-link">Home</a>
+    </nav>
+
     <div class="login-container">
         <div class="login-header">
             <h1>🔐 Employee Management</h1>

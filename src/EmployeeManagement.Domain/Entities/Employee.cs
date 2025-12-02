@@ -29,7 +29,7 @@ public class Employee
 
     /// <summary>
     /// Government-issued identity number (e.g., SSN, National ID).
-    /// Format: XXX-XXXXXX-XXXXX (Nicaragua format example)
+    /// Format: XXX-XXXXXX-XXXXX (El Salvador format example)
     /// </summary>
     [Required(ErrorMessage = "Identity number is required")]
     [StringLength(50, ErrorMessage = "Identity number cannot exceed 50 characters")]
