@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeManagement.API", "E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeManagement.RazorUI", "EmployeeManagement.RazorUI\EmployeeManagement.RazorUI.csproj", "{029E78D9-70D7-4063-A2AF-8CFD84993C31}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeManagement.BlazorUI", "EmployeeManagement.BlazorUI\EmployeeManagement.BlazorUI.csproj", "{8D639DCD-B532-4187-BB5E-DE2F58EB06E5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,5 +44,9 @@ Global
 		{029E78D9-70D7-4063-A2AF-8CFD84993C31}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{029E78D9-70D7-4063-A2AF-8CFD84993C31}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{029E78D9-70D7-4063-A2AF-8CFD84993C31}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D639DCD-B532-4187-BB5E-DE2F58EB06E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D639DCD-B532-4187-BB5E-DE2F58EB06E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D639DCD-B532-4187-BB5E-DE2F58EB06E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D639DCD-B532-4187-BB5E-DE2F58EB06E5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

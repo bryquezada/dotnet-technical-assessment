@@ -1,0 +1,124 @@
+@page "/users"
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+@inject HttpClient Http
+@inject IAuthService AuthService
+@inject NavigationManager Navigation
+
+<PageTitle>Users - Employee Management</PageTitle>
+
+<MudThemeProvider />
+<MudPopoverProvider />
+<MudDialogProvider />
+<MudSnackbarProvider />
+
+<div style="min-height: 100vh; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 20px;">
+    
+    <!-- Navbar -->
+    <MudAppBar Elevation="0" Style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); margin-bottom: 20px;">
+        <MudText Typo="Typo.h6" Style="color: white; font-weight: 700;">🏢 Employee Management</MudText>
+        <MudSpacer />
+        <MudText Typo="Typo.body1" Style="color: white; margin-right: 20px;">Welcome, <strong>@currentUser</strong></MudText>
+        <MudButton Variant="Variant.Filled" Color="Color.Surface" OnClick="HandleLogout" Style="color: #667eea; font-weight: 600;">
+            Logout
+        </MudButton>
+    </MudAppBar>
+
+    <MudContainer MaxWidth="MaxWidth.Large">
+        <MudPaper Elevation="24" Style="padding: 40px; border-radius: 20px;">
+            <div style="display: flex; align-items: center; margin-bottom: 30px;">
+                <MudText Typo="Typo.h4" Style="flex: 1;">👥 User Management</MudText>
+            </div>
+
+            @if (isLoading)
+            {
+                <div style="text-align: center; padding: 40px;">
+                    <MudProgressCircular Size="Size.Large" Indeterminate="true" Color="Color.Primary" />
+                    <MudText Typo="Typo.body1" Style="margin-top: 20px; color: #666;">Loading users...</MudText>
+                </div>
+            }
+            else if (!string.IsNullOrEmpty(errorMessage))
+            {
+                <MudAlert Severity="Severity.Error">@errorMessage</MudAlert>
+            }
+            else if (users != null && users.Any())
+            {
+                <MudTable Items="@users" Hover="true" Breakpoint="Breakpoint.Sm" Style="background: transparent;">
+                    <HeaderContent>
+                        <MudTh Style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; font-weight: 600;">ID</MudTh>
+                        <MudTh Style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; font-weight: 600;">Username</MudTh>
+                        <MudTh Style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; font-weight: 600;">Role</MudTh>
+                    </HeaderContent>
+                    <RowTemplate>
+                        <MudTd DataLabel="ID">@context.Id</MudTd>
+                        <MudTd DataLabel="Username">@context.Username</MudTd>
+                        <MudTd DataLabel="Role">
+                            <MudChip T="string" Color="@(context.Role == "Admin" ? Color.Error : Color.Info)" Size="Size.Small">
+                                @context.Role
+                            </MudChip>
+                        </MudTd>
+                    </RowTemplate>
+                </MudTable>
+            }
+            else
+            {
+                <MudText Typo="Typo.body1" Style="color: #666; text-align: center; padding: 40px;">
+                    No users found.
+                </MudText>
+            }
+        </MudPaper>
+    </MudContainer>
+</div>
+
+@code {
+    private List<UserDto>? users;
+    private string currentUser = string.Empty;
+    private string errorMessage = string.Empty;
+    private bool isLoading = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            currentUser = await AuthService.GetCurrentUserAsync() ?? "User";
+            
+            var response = await Http.GetAsync("/api/auth/users");
+            
+            if (response.IsSuccessStatusCode)
+            {
+                users = await response.Content.ReadFromJsonAsync<List<UserDto>>();
+            }
+            else if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+            {
+                errorMessage = "Unauthorized. Please log in again.";
+                await Task.Delay(2000);
+                Navigation.NavigateTo("/login");
+            }
+            else
+            {
+                errorMessage = "Failed to load users. Please try again.";
+            }
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error: {ex.Message}";
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    private async Task HandleLogout()
+    {
+        await AuthService.LogoutAsync();
+        Navigation.NavigateTo("/login");
+    }
+
+    private class UserDto
+    {
+        public int Id { get; set; }
+        public string Username { get; set; } = string.Empty;
+        public string Role { get; set; } = string.Empty;
+    }
+}
