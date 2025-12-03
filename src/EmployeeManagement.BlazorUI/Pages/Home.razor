@@ -1,0 +1,68 @@
+﻿@page "/"
+
+<PageTitle>Employee Management System</PageTitle>
+
+<MudThemeProvider />
+<MudPopoverProvider />
+<MudDialogProvider />
+<MudSnackbarProvider />
+
+<div style="min-height: 100vh; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; flex-direction: column;">
+    
+    <!-- Navbar -->
+    <MudAppBar Elevation="0" Style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px);">
+        <MudText Typo="Typo.h6" Style="color: white; font-weight: 700;">🏢 Employee Management</MudText>
+        <MudSpacer />
+        <MudButton Href="/login" Variant="Variant.Filled" Style="background: rgba(255, 255, 255, 0.2); color: white; font-weight: 600; backdrop-filter: blur(10px);">Login</MudButton>
+    </MudAppBar>
+
+    <!-- Hero Section -->
+    <MudContainer MaxWidth="MaxWidth.Large" Style="flex: 1; display: flex; align-items: center; justify-content: center; padding: 40px 20px;">
+        <MudPaper Elevation="24" Style="padding: 60px; border-radius: 20px; max-width: 800px; text-align: center;">
+            <MudText Typo="Typo.h2" Style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 20px; font-weight: 700;">
+                Welcome
+            </MudText>
+            <MudText Typo="Typo.body1" Style="color: #666; margin-bottom: 40px; line-height: 1.6;">
+                A modern Employee Management System built with .NET 8, featuring Clean Architecture,
+                JWT Authentication, and a beautiful Blazor WebAssembly interface powered by MudBlazor.
+            </MudText>
+
+            <!-- Features -->
+            <MudGrid Spacing="3" Style="margin-bottom: 40px;">
+                <MudItem xs="12" sm="4">
+                    <MudPaper Elevation="0" Style="padding: 20px; background: #f8f9fa; border-radius: 10px;">
+                        <MudText Typo="Typo.h4" Style="margin-bottom: 10px;">👥</MudText>
+                        <MudText Typo="Typo.h6" Style="font-weight: 600; margin-bottom: 5px;">User Management</MudText>
+                        <MudText Typo="Typo.body2" Style="color: #666;">Secure authentication with JWT</MudText>
+                    </MudPaper>
+                </MudItem>
+                <MudItem xs="12" sm="4">
+                    <MudPaper Elevation="0" Style="padding: 20px; background: #f8f9fa; border-radius: 10px;">
+                        <MudText Typo="Typo.h4" Style="margin-bottom: 10px;">📊</MudText>
+                        <MudText Typo="Typo.h6" Style="font-weight: 600; margin-bottom: 5px;">Employee CRUD</MudText>
+                        <MudText Typo="Typo.body2" Style="color: #666;">Complete data management</MudText>
+                    </MudPaper>
+                </MudItem>
+                <MudItem xs="12" sm="4">
+                    <MudPaper Elevation="0" Style="padding: 20px; background: #f8f9fa; border-radius: 10px;">
+                        <MudText Typo="Typo.h4" Style="margin-bottom: 10px;">🔒</MudText>
+                        <MudText Typo="Typo.h6" Style="font-weight: 600; margin-bottom: 5px;">Secure</MudText>
+                        <MudText Typo="Typo.body2" Style="color: #666;">Protected endpoints</MudText>
+                    </MudPaper>
+                </MudItem>
+            </MudGrid>
+
+            <!-- CTA Buttons -->
+            <MudStack Row="true" Justify="Justify.Center" Spacing="3">
+                <MudButton Href="/login" Variant="Variant.Filled" Size="Size.Large" 
+                           Style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 15px 40px; font-weight: 600;">
+                    Get Started →
+                </MudButton>
+                <MudButton Href="http://localhost:5008/swagger" Target="_blank" Variant="Variant.Outlined" Size="Size.Large"
+                           Style="border: 2px solid #667eea; color: #667eea; padding: 15px 40px; font-weight: 600;">
+                    View API Docs
+                </MudButton>
+            </MudStack>
+        </MudPaper>
+    </MudContainer>
+</div>

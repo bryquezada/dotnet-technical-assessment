@@ -1,0 +1,120 @@
+@page "/login"
+@inject IAuthService AuthService
+@inject NavigationManager Navigation
+
+<PageTitle>Login - Employee Management</PageTitle>
+
+<MudThemeProvider />
+<MudPopoverProvider />
+<MudDialogProvider />
+<MudSnackbarProvider />
+
+<div style="min-height: 100vh; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; flex-direction: column;">
+    
+    <!-- Transparent Navbar -->
+    <div style="padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; z-index: 10;">
+        <MudText Typo="Typo.h6" Style="color: white; font-weight: 700;">🏢 Employee Management</MudText>
+        <MudButton Href="/" Variant="Variant.Filled" Style="background: rgba(255, 255, 255, 0.2); color: white; backdrop-filter: blur(10px);">Home</MudButton>
+    </div>
+    
+    <!-- Login Content -->
+    <div style="flex: 1; display: flex; align-items: center; justify-content: center; padding: 20px;">
+
+    <!-- Login Card -->
+    <MudPaper Elevation="24" Style="padding: 40px; border-radius: 20px; max-width: 400px; width: 100%;">
+        <div style="text-align: center; margin-bottom: 30px;">
+            <MudText Typo="Typo.h4" Style="margin-bottom: 10px;">🔐 Employee Management</MudText>
+            <MudText Typo="Typo.body2" Style="color: #666;">Sign in to continue</MudText>
+        </div>
+
+        @if (!string.IsNullOrEmpty(errorMessage))
+        {
+            <MudAlert Severity="Severity.Error" Style="margin-bottom: 20px;">@errorMessage</MudAlert>
+        }
+
+        <MudForm @ref="form" @bind-IsValid="@success">
+            <MudTextField @bind-Value="username" 
+                          Label="Username" 
+                          Variant="Variant.Outlined" 
+                          Required="true"
+                          RequiredError="Username is required"
+                          Style="margin-bottom: 20px;" />
+            
+            <MudTextField @bind-Value="password" 
+                          Label="Password" 
+                          Variant="Variant.Outlined" 
+                          InputType="InputType.Password"
+                          Required="true"
+                          RequiredError="Password is required"
+                          Style="margin-bottom: 20px;" />
+
+            <MudButton Variant="Variant.Filled" 
+                       Color="Color.Primary" 
+                       FullWidth="true" 
+                       Size="Size.Large"
+                       OnClick="HandleLogin"
+                       Disabled="@isLoading"
+                       Style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); margin-top: 10px;">
+                @if (isLoading)
+                {
+                    <MudProgressCircular Size="Size.Small" Indeterminate="true" />
+                }
+                else
+                {
+                    <span>Sign In</span>
+                }
+            </MudButton>
+        </MudForm>
+
+        <!-- Test Credentials -->
+        <MudPaper Elevation="0" Style="margin-top: 30px; padding: 20px; background: #f8f9fa; border-radius: 10px;">
+            <MudText Typo="Typo.body2" Style="font-weight: 600; margin-bottom: 10px;">📝 Test Credentials</MudText>
+            <MudText Typo="Typo.body2" Style="margin-bottom: 5px;"><strong>Admin:</strong> <code>admin</code> / <code>admin123</code></MudText>
+            <MudText Typo="Typo.body2" Style="margin-bottom: 5px;"><strong>User:</strong> <code>user1</code> / <code>user123</code></MudText>
+            <MudText Typo="Typo.body2"><strong>Test:</strong> <code>test</code> / <code>test123</code></MudText>
+        </MudPaper>
+    </MudPaper>
+    </div>
+</div>
+
+@code {
+    private MudForm? form;
+    private bool success;
+    private string username = string.Empty;
+    private string password = string.Empty;
+    private string errorMessage = string.Empty;
+    private bool isLoading = false;
+
+    private async Task HandleLogin()
+    {
+        await form!.Validate();
+
+        if (!success)
+            return;
+
+        isLoading = true;
+        errorMessage = string.Empty;
+
+        try
+        {
+            var result = await AuthService.LoginAsync(username, password);
+
+            if (result)
+            {
+                Navigation.NavigateTo("/users");
+            }
+            else
+            {
+                errorMessage = "Invalid username or password. Please try again.";
+            }
+        }
+        catch (Exception)
+        {
+            errorMessage = "Unable to connect to the API. Please ensure the API is running.";
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+}
