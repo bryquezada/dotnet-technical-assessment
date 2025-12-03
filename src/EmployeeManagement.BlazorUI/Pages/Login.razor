@@ -9,13 +9,16 @@
 <MudDialogProvider />
 <MudSnackbarProvider />
 
-<div style="min-height: 100vh; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center; padding: 20px;">
+<div style="min-height: 100vh; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; flex-direction: column;">
     
     <!-- Transparent Navbar -->
-    <div style="position: absolute; top: 0; left: 0; width: 100%; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center;">
+    <div style="padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; z-index: 10;">
         <MudText Typo="Typo.h6" Style="color: white; font-weight: 700;">🏢 Employee Management</MudText>
-        <MudButton Href="/" Variant="Variant.Text" Style="color: white;">Home</MudButton>
+        <MudButton Href="/" Variant="Variant.Filled" Style="background: rgba(255, 255, 255, 0.2); color: white; backdrop-filter: blur(10px);">Home</MudButton>
     </div>
+    
+    <!-- Login Content -->
+    <div style="flex: 1; display: flex; align-items: center; justify-content: center; padding: 20px;">
 
     <!-- Login Card -->
     <MudPaper Elevation="24" Style="padding: 40px; border-radius: 20px; max-width: 400px; width: 100%;">
@@ -71,6 +74,7 @@
             <MudText Typo="Typo.body2"><strong>Test:</strong> <code>test</code> / <code>test123</code></MudText>
         </MudPaper>
     </MudPaper>
+    </div>
 </div>
 
 @code {

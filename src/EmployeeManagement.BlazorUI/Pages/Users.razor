@@ -12,17 +12,20 @@
 <MudDialogProvider />
 <MudSnackbarProvider />
 
-<div style="min-height: 100vh; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 20px;">
+<div style="min-height: 100vh; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; flex-direction: column;">
     
     <!-- Navbar -->
-    <MudAppBar Elevation="0" Style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); margin-bottom: 20px;">
+    <MudAppBar Elevation="0" Style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px);">
         <MudText Typo="Typo.h6" Style="color: white; font-weight: 700;">🏢 Employee Management</MudText>
         <MudSpacer />
         <MudText Typo="Typo.body1" Style="color: white; margin-right: 20px;">Welcome, <strong>@currentUser</strong></MudText>
-        <MudButton Variant="Variant.Filled" Color="Color.Surface" OnClick="HandleLogout" Style="color: #667eea; font-weight: 600;">
+        <MudButton Variant="Variant.Filled" OnClick="HandleLogout" Style="background: rgba(255, 255, 255, 0.2); color: white; font-weight: 600; backdrop-filter: blur(10px);">
             Logout
         </MudButton>
     </MudAppBar>
+    
+    <!-- Content -->
+    <div style="flex: 1; padding: 20px; display: flex; align-items: center; justify-content: center;">
 
     <MudContainer MaxWidth="MaxWidth.Large">
         <MudPaper Elevation="24" Style="padding: 40px; border-radius: 20px;">
@@ -68,6 +71,7 @@
             }
         </MudPaper>
     </MudContainer>
+    </div>
 </div>
 
 @code {
